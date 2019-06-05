@@ -7,7 +7,39 @@
 .container>*{
 	display: inline-block;
 }
+.generate{
+	font-size: 20px;
+	color: black;
+}
 .generate-all{
 	display: block;
+	margin: auto;
+}
+.avatar{
+	border: 2px solid black;
+	border-radius: 2px;
+}
+.name{
+	font-size: 20px;
+	font-weight: bold;
+}
+blockquote{
+	font-size: 18px;
+	font-style: italic;
+}
+blockquote::after{
+	content: "\201D";
+}
+blockquote::before{
+	content: "\201C";
+}
+h1, h3, section{
+	margin-left: 20px;
+}
+main{
+	border: 1px dashed #aaaaaa;
+	border-radius: 5px;
+	width: 500px;
+	padding: 30px;
 	margin: auto;
 }
