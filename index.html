@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Random Character</title>
+	<meta charset="UTF-8" name="description" content="Generate a robo avatar, a name and a motto for your character.">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" />
+  	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+  	<link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+	<header>
+		<h1>Random Character</h1>
+		<h3>Generate a random robo avatar, a name and a motto for your character.</h3>
+	</header>
+	<button class="generate js-generate-avatar js-generate-name js-generate-advice">New character</button>
+	<main>
+		<div class="avatar-container">
+			<img class="avatar js-avatar">
+			<button class="generate js-generate-avatar">&#x27f3</button>
+		</div>
+		<div class="name-container">
+			<span class="name js-name"></span>
+			<button class="generate js-generate-name">&#x27f3</button>
+		</div>
+		<div class="advice-container">
+			<blockquote class="js-advice"></blockquote>
+			<button class="generate js-generate-advice">&#x27f3</button>
+		</div>
+	</main>
+	<section class="help">
+		<p>Click <em>New character</em> to generate a completely new character. Alternatively you can also refresh each property separately with the refresh button next to them.</p>
+	</section>
+	<footer>
+		<h3>Credits</h3>
+	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  	<script src = "app.js"></script>
+</body>
+</html>
