@@ -1,3 +1,13 @@
 *{
 	font-family: Roboto, serif;
 }
+.container{
+	text-align: center;
+}
+.container>*{
+	display: inline-block;
+}
+.generate-all{
+	display: block;
+	margin: auto;
+}
