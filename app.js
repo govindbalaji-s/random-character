@@ -59,13 +59,20 @@ var disableButtons = () => {
 	adviceButton.attr('disabled', 'true');
 	allButton.attr('disabled', 'true');
 }
-
-var renderCharacter = state =>{ 
-	avatarHolder.attr('src', state.avatar);
+var renderNameAdvice = state =>{
 	nameHolder.text(state.name);	
 	adviceHolder.text(state.advice);
-
-	enableButtons();
+}
+var renderCharacter = state =>{ 
+	if(avatarHolder.attr('src') !== state.avatar)
+	{
+		avatarHolder.attr('src', state.avatar);
+		//the image on load takes care of the rest from here
+	}
+	else{
+		renderNameAdvice(state);
+		enableButtons();
+	}	
 };
 
 var setupHandlers = ()=>{
@@ -87,6 +94,11 @@ var setupHandlers = ()=>{
 	allButton.click(e => {
 		disableButtons();
 		newCharacter(state, renderCharacter);
+	});
+
+	avatarHolder.on('load', function(){
+		renderNameAdvice(state);
+		enableButtons();
 	})
 };
 
