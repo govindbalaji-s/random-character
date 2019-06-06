@@ -46,26 +46,46 @@ var newCharacter = (state, callBack) =>{
 	$.when(nameAjax(state, nothing), adviceAjax(state, nothing)).done((state1, state2) => {callBack(state);});
 };
 
+var enableButtons = ()=>{
+	nameButton.removeAttr('disabled');
+	avatarButton.removeAttr('disabled');
+	adviceButton.removeAttr('disabled');
+	allButton.removeAttr('disabled');
+}
+
+var disableButtons = () => {
+	nameButton.attr('disabled', 'true');
+	avatarButton.attr('disabled', 'true');
+	adviceButton.attr('disabled', 'true');
+	allButton.attr('disabled', 'true');
+}
+
 var renderCharacter = state =>{ 
 	avatarHolder.attr('src', state.avatar);
 	nameHolder.text(state.name);	
 	adviceHolder.text(state.advice);
+
+	enableButtons();
 };
 
 var setupHandlers = ()=>{
 	nameButton.click(e => {
+		disableButtons();
 		newName(state, renderCharacter);
 	});
 
 	avatarButton.click(e => {
+		disableButtons();
 		newAvatar(state, renderCharacter);
 	});
 
 	adviceButton.click(e => {
+		disableButtons();
 		newAdvice(state, renderCharacter);
 	});
-	
+
 	allButton.click(e => {
+		disableButtons();
 		newCharacter(state, renderCharacter);
 	})
 };
