@@ -5,6 +5,7 @@ const nameURL = "https://api.codetunnel.net/random-nick",
 
 var nameHolder = $('.js-name'), avatarHolder = $('.js-avatar'), adviceHolder = $('.js-advice');
 var nameButton = $('.js-generate-name'), avatarButton = $('.js-generate-avatar'), adviceButton = $('.js-generate-advice');
+var allButton = $('.js-generate-all');
 
 var state={
 	name: "My noob bread",
@@ -12,14 +13,16 @@ var state={
 	advice: "It is easy to sit up and take notice, what's difficult is getting up and taking action."
 };
 
-var newName = (state, renderCallback) =>{
-	$.ajax({
+var nameAjax = (state, renderCallback) => $.ajax({
 		type: "POST",
 		url: nameURL,
 		dataType: "json",
 		data: JSON.stringify({theme: "default", sizeLimit: 21}),
 		success: result => {state.name = result.nickname;renderCallback(state);}
 	});
+
+var newName = (state, renderCallback) =>{
+	nameAjax(state, renderCallback);
 };
 
 var newAvatar = (state, renderCallback) =>{
@@ -27,24 +30,25 @@ var newAvatar = (state, renderCallback) =>{
 	renderCallback(state);
 };
 
-var newAdvice = (state, renderCallback) =>{
-	$.ajax({
+var adviceAjax = (state, renderCallback) => $.ajax({
 		type: "GET",
 		url: adviceURL,
 		dataType: "json",
 		success: result => {state.advice = result.slip.advice;renderCallback(state);}
 	});
+var newAdvice = (state, renderCallback) =>{
+	adviceAjax(state, renderCallback);
 };
 
-var newCharacter = state =>{
-	newAvatar(state, renderCharacter);
-	newName(state, renderCharacter);
-	newAdvice(state, renderCharacter);
+var newCharacter = (state, callBack) =>{
+	var nothing = (s)=>{};
+	newAvatar(state, nothing);
+	$.when(nameAjax(state, nothing), adviceAjax(state, nothing)).done((state1, state2) => {callBack(state);});
 };
 
 var renderCharacter = state =>{ 
-	nameHolder.text(state.name);
 	avatarHolder.attr('src', state.avatar);
+	nameHolder.text(state.name);	
 	adviceHolder.text(state.advice);
 };
 
@@ -60,10 +64,13 @@ var setupHandlers = ()=>{
 	adviceButton.click(e => {
 		newAdvice(state, renderCharacter);
 	});
+	
+	allButton.click(e => {
+		newCharacter(state, renderCharacter);
+	})
 };
 
 $(function(){
 	setupHandlers();
-	newCharacter(state);
-	//renderCharacter(state);
+	newCharacter(state, renderCharacter);
 });
