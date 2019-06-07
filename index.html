@@ -2,42 +2,71 @@
 <html>
 <head>
 	<title>Random Character</title>
-	<meta charset="UTF-8" name="description" content="Generate a robo avatar, a name and a motto for your character.">
+	<meta charset="UTF-8" name="description" content="Generate a robot avatar, a name and a motto for your character.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" />
-  	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Cuprum|Bitter|Roboto+Slab|Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="float-grid.css"/>
   	<link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
 	<header>
-		<h1>Random Character</h1>
-		<h3>Generate a random robo avatar, a name and a motto for your character.</h3>
+        <div class="row">
+            <div class="col-12">
+        		<h1>Random Character</h1>
+        		<h3>Generate a random robot avatar, a name and a motto for your character.</h3>
+            </div>
+        </div>
 	</header>
-	<button class="generate generate-all js-generate-all">New character</button>
-	<main>
-		<div class="container avatar-container">
-			<img class="avatar js-avatar" src="https://robohash.org/loremipsum" alt="Avatar">
-			<button class="generate js-generate-avatar">&#x27f3</button>
-		</div>
-		<div class="container name-container">
-			<span class="name js-name">My noob bread</span>
-			<button class="generate js-generate-name">&#x27f3</button>
-		</div>
-		<div class="container advice-container">
-			<blockquote class="advice js-advice">It is easy to sit up and take notice, what's difficult is getting up and taking action.</blockquote>
-			<button class="generate js-generate-advice">&#x27f3</button>
-		</div>
-	</main>
-	<section class="help">
-		<p>Click <em>New character</em> to generate a completely new character. Alternatively you can also refresh each property separately with the refresh button next to them.</p>
-	</section>
-	<footer>
-		<h3>Credits</h3>
-		<ul>
-			<li class="credit">Names from <a class="credit-link" href="https://randomnick.cdt.one/">https://randomnick.cdt.one</a>.</li>
-		 	<li class="credit">Avatars from <a class="credit-link" href="https://robohash.org">Robohash</a>.</li>
-		 	<li class="credit">Advice/Motto from <a class="credit-link" href="https://adviceslip.com">Adviceslip</a>.</li>
-		</ul>
-	</footer>
+    <div class="row">
+        <div class="col-12">
+	       <button class="generate generate-all js-generate-all">New character</button>
+       </div>
+   </div>
+   <div class = "row">
+        <div class="col-3">
+            <br/>
+        </div>
+        <div class = "col-6">
+        	<main>
+        		<div class="container avatar-container">
+                    
+                    <img class="avatar holder js-avatar" src="https://robohash.org/loremipsum" alt="Avatar">
+        			<button class="generate js-generate-avatar generate-avatar">&#x27f3</button>
+        		</div>
+        		<div class="container name-container">
+        			<span class="name holder js-name">My noob bread</span>
+        			<button class="generate js-generate-name generate-name">&#x27f3</button>
+        		</div>
+        		<div class="container advice-container">
+        			<blockquote class="advice holder js-advice">It is easy to sit up and take notice, what's difficult is getting up and taking action.</blockquote>
+        			<button class="generate js-generate-advice">&#x27f3</button>
+        		</div>
+        	</main>
+        </div>
+        <div class="col-3">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+        	<section class="help">
+        		<p>Click <em>New character</em> to generate a completely new character. Alternatively you can also refresh each property separately with the refresh button next to them.</p>
+        	</section>
+        </div>
+    </div>
+	<div class="row">
+        <div class="col-12">
+            <footer>
+        		<h3>Credits</h3>
+        		<ul>
+        			<li class="credit">Names from <a class="credit-link" href="https://randomnick.cdt.one/">https://randomnick.cdt.one</a>.</li>
+        		 	<li class="credit">Avatars from <a class="credit-link" href="https://robohash.org">Robohash</a>.</li>
+        		 	<li class="credit">Advice/Motto from <a class="credit-link" href="https://adviceslip.com">Adviceslip</a>.</li>
+        		</ul>
+        	</footer>
+        </div>
+    </div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   	<script src="app.js"></script>
 </body>
