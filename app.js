@@ -23,12 +23,12 @@ var nameAjax = (state, renderCallback) => $.ajax({
 		success: result => {state.name = result.nickname;renderCallback(state);}
 	});
 
-var newName = (state, renderCallback) =>{
+var getNewName = (state, renderCallback) =>{
 	nameAjax(state, renderCallback);
 };
 
-var newAvatar = (state, renderCallback) =>{
-	state.avatar = `https://robohash.org/${state.avatar}`;
+var getNewAvatar = (state, renderCallback) =>{
+	state.avatar = `https://robohash.org/${state.avatar + state.name}`;
 	renderCallback(state);
 };
 
@@ -38,16 +38,18 @@ var adviceAjax = (state, renderCallback) => $.ajax({
 		dataType: "json",
 		success: result => {state.advice = result.slip.advice;renderCallback(state);}
 	});
-var newAdvice = (state, renderCallback) =>{
+var getNewAdvice = (state, renderCallback) =>{
 	adviceAjax(state, renderCallback);
 };
 
-var newCharacter = (state, callBack) =>{
-	var nothing = (s)=>{};
-	newAvatar(state, nothing);
-	$.when(nameAjax(state, nothing), adviceAjax(state, nothing)).done((state1, state2) => {callBack(state);});
+var getNewCharacter = (state, renderCallback) =>{
+	var dummyCallback = (s)=>{};
+	getNewAvatar(state, dummyCallback);
+	$.when(nameAjax(state, dummyCallback), adviceAjax(state, dummyCallback)).done(
+        (state1, state2) => {renderCallback(state);}
+    );
 };
-var toggleReloads = state => {
+var toggleButtonsHidden = state => {
     state.buttonsHidden = ! state.buttonsHidden;
 }
 //
@@ -104,22 +106,22 @@ var renderButtons = state => {
 var setupHandlers = ()=>{
 	nameButton.click(e => {
 		disableButtons();
-		newName(state, renderCharacter);
+		getNewName(state, renderCharacter);
 	});
 
 	avatarButton.click(e => {
 		disableButtons();
-		newAvatar(state, renderCharacter);
+		getNewAvatar(state, renderCharacter);
 	});
 
 	adviceButton.click(e => {
 		disableButtons();
-		newAdvice(state, renderCharacter);
+		getNewAdvice(state, renderCharacter);
 	});
 
 	allButton.click(e => {
 		disableButtons();
-		newCharacter(state, renderCharacter);
+		getNewCharacter(state, renderCharacter);
 	});
 
 	avatarHolder.on('load', function(){
@@ -128,12 +130,12 @@ var setupHandlers = ()=>{
 	});
 
     toggleButton.click(e => {
-        toggleReloads(state);
+        toggleButtonsHidden(state);
         renderButtons(state);
-    })
+    });
 };
 
 $(function(){
 	setupHandlers();
-	newCharacter(state, renderCharacter);
+	getNewCharacter(state, renderCharacter);
 });

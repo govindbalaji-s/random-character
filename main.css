@@ -1,19 +1,12 @@
-*{
-	
-}
 body{
     /*background-color: #D3F5EC;*/
     color: #6E210A;
     font-family: 'Bitter', serif;
     background-image: linear-gradient(to top, #FA8B69, #D3F5EC);
 }
-
 .container{
 	text-align: center;
 }
-/*.container>*{
-	display: inline-block;
-}*/
 button{
     font-family: 'Yanone Kaffeesatz', sans-serif;
     background: #6E210A;
