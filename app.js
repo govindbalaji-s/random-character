@@ -6,11 +6,13 @@ const nameURL = "https://api.codetunnel.net/random-nick",
 var nameHolder = $('.js-name'), avatarHolder = $('.js-avatar'), adviceHolder = $('.js-advice');
 var nameButton = $('.js-generate-name'), avatarButton = $('.js-generate-avatar'), adviceButton = $('.js-generate-advice');
 var allButton = $('.js-generate-all');
+var toggleButton = $('.toggle-reloads');
 
 var state={
 	name: "My noob bread",
 	avatar: "https://robohash.org/loremipsum",
-	advice: "It is easy to sit up and take notice, what's difficult is getting up and taking action."
+	advice: "It is easy to sit up and take notice, what's difficult is getting up and taking action.",
+    buttonsHidden: false
 };
 
 var nameAjax = (state, renderCallback) => $.ajax({
@@ -45,7 +47,10 @@ var newCharacter = (state, callBack) =>{
 	newAvatar(state, nothing);
 	$.when(nameAjax(state, nothing), adviceAjax(state, nothing)).done((state1, state2) => {callBack(state);});
 };
-
+var toggleReloads = state => {
+    state.buttonsHidden = ! state.buttonsHidden;
+}
+//
 var enableButtons = ()=>{
 	nameButton.removeAttr('disabled');
 	avatarButton.removeAttr('disabled');
@@ -74,7 +79,28 @@ var renderCharacter = state =>{
 		enableButtons();
 	}	
 };
-
+var renderButtons = state => {
+    if(state.buttonsHidden){
+        nameButton.addClass('hidden');
+        adviceButton.addClass('hidden');
+        avatarButton.addClass('hidden');
+        toggleButton.text('Show buttons');
+        if($(window).width() >= 960){
+            nameHolder.css('left', '0');
+            avatarHolder.css('left', '0');
+        }
+    }
+    else{
+        nameButton.removeClass('hidden');
+        adviceButton.removeClass('hidden');
+        avatarButton.removeClass('hidden');
+        toggleButton.text('Hide buttons');
+        if($(window).width() >= 960){
+            nameHolder.css('left', '25px');
+            avatarHolder.css('left', '25px');
+        }
+    }
+}
 var setupHandlers = ()=>{
 	nameButton.click(e => {
 		disableButtons();
@@ -99,7 +125,12 @@ var setupHandlers = ()=>{
 	avatarHolder.on('load', function(){
 		renderNameAdvice(state);
 		enableButtons();
-	})
+	});
+
+    toggleButton.click(e => {
+        toggleReloads(state);
+        renderButtons(state);
+    })
 };
 
 $(function(){

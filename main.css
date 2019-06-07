@@ -7,20 +7,23 @@ body{
     font-family: 'Bitter', serif;
     background-image: linear-gradient(to top, #FA8B69, #D3F5EC);
 }
+
 .container{
 	text-align: center;
 }
 /*.container>*{
 	display: inline-block;
 }*/
-.generate{
+button{
     font-family: 'Yanone Kaffeesatz', sans-serif;
     background: #6E210A;
     color: white;
     border: 3px solid #aaaaaa;
     border-radius: 3px;
-	font-size: 20px;
-    display: block;
+    font-size: 20px;
+}
+.generate{    
+    display: inline-block;
     margin-left: auto;
     margin-right: auto;
 }
@@ -33,9 +36,10 @@ body{
 .generate:disabled{
     background: #FA8B69;
 }
-.generate-all{
+.top-buttons{
 	display: block;
 	margin: auto;
+    text-align: center;
 }
 .avatar{
 	border: 2px solid black;
@@ -95,4 +99,7 @@ main{
         left:25px;
     }
 
+}
+.hidden{
+    display: none;
 }
